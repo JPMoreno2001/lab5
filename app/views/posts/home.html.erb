@@ -1,4 +1,91 @@
-<div class="text-center">
-    <h1>Welcome to Y!</h1>
-    <h3>Take sometime to think Y you are here</h1>
+<head>
+  <div class="container mt-5">
+    <h1>Home</h1>
+    <h2>Welcome to Y</h2>
+  </div>
+</head>
+
+<body class="colorceleste">
+  <div class="container mt-5">
+    <h3>Profile Configuration</h3>
+    <p>Username: <input type="text" id="usernameInput"></p>
+    <button id="saveProfileButton">Save Profile</button>
+  </div>
+
+  <div class="container mt-5">
+    <h3>Compose a Yweet</h3>
+    <form id="yweetForm">
+      <textarea id="yweetContent" maxlength="255" placeholder="What's on your mind?"></textarea>
+      <button type="submit">Post Yweet</button>
+    </form>
+  </div>
+
+  <div class="container mt-5" id="userYweetsSection">
+    <h3>Your Yweets</h3>
+  </div>
+
+  <style>
+    .yweet-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .colorceleste {
+      background-color: rgb(154, 236, 172);
+    }
+  </style>
+
+  <script>
+    // JavaScript code to handle form submission
+    document.getElementById("yweetForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the content of the Yweet
+      var yweetContent = document.getElementById("yweetContent").value;
+
+      // Get the current date and time
+      var currentDate = new Date().toLocaleString();
+
+      // Create a new Yweet element
+      var yweetElement = document.createElement("div");
+      yweetElement.classList.add("yweet-container"); // Add container class
+      yweetElement.innerHTML = "<p><strong>" + document.getElementById("usernameInput").value + ":</strong> " + yweetContent + "</p><p><span class='yweetDate'>Posted on " + currentDate + "</span></p>";
+      
+      // Add buttons for interaction
+      yweetElement.innerHTML += "<button class='commentButton'>Comment</button>";
+      yweetElement.innerHTML += "<button class='likeButton'>Like</button>";
+      yweetElement.innerHTML += "<button class='tagButton'>Tag</button>";
+
+      // Add the Yweet to the Yweets section
+      document.getElementById("userYweetsSection").appendChild(yweetElement);
+
+      // Clear the Yweet composition form
+      document.getElementById("yweetContent").value = "";
+    });
+  </script>
+</body>
+
+<div class="container mt-5">
+  <h1>About Y</h1>
+  <p>Y is a place where you can be whoever you want!!</p>
+</div>
+
+<div class="container mt-5">
+  <h1>Contact</h1>
+  <%= form_with url: contact_path, method: :post do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :message %>
+      <%= f.text_area :message, class: "form-control" %>
+    </div>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  <% end %>
 </div>
