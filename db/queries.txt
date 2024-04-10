@@ -1,0 +1,21 @@
+#1
+all_users = User.all
+
+#2
+user_with_id_3 = User.find_by(id: 3)
+
+#3
+posts_more_than_100_likes = Post.where('likes_count > ?', 100)
+
+#4
+posts_10_answers_20_likes = Post.where('answers_count > ? AND likes_count < ?', 10, 20)
+
+#5
+users_created_in_january = User.where('extract(month from created_at) = ?', 1)
+
+#6
+user_with_id_3.update(name: "Juan")
+
+#7
+post_to_delete = Post.find_by(id: 5)
+post_to_delete.destroy if post_to_delete
